@@ -1,12 +1,12 @@
 <ons-page id="tab3">
-	<ons-toolbar>
-		<div class="center" id="toolbar-title">Activitate nouă</div>
-	</ons-toolbar>
-	<div id="qrcode2" style="margin: 10px auto; width: 200px; height: 200px;"></div>
-	<p style="padding: 10px">
-		<ons-button modifier="large" id="decl">Activitate nouă</ons-button>
-	</p>
-	<script>
+    <ons-toolbar>
+        <div class="center" id="toolbar-title">Activitate nouă</div>
+    </ons-toolbar>
+    <div id="qrcode2" style="margin: 10px auto; width: 200px; height: 200px;"></div>
+    <p style="padding: 10px">
+        <ons-button modifier="large" id="decl">Activitate nouă</ons-button>
+    </p>
+    <script>
         let tab3 = document.querySelector("#tab3");
         let codact = localStorage.getItem("codact");
         if (codact) {
@@ -27,6 +27,8 @@
         document.querySelector("#decl").onclick = function () {
             //  AJAX: Apelez scriptul "adactiv.php"
             var request = new XMLHttpRequest();
+            var formData = new FormData();
+            formData.append('uid', device.uuid);
             request.open("POST", "http://aplimob.net/proiect/adactiv.php");
 
             // S-au primit date de la scriptul de pe server
@@ -47,6 +49,8 @@
 
                 //  Memorez noul codact
                 localStorage.setItem("codact", obj.codact);
+                //  Alert activitate inregistrata
+                ons.notification.alert('Activitate inregistrată cu succes.');
             };
 
             // S-a produs o eroare
@@ -54,7 +58,7 @@
                 alert('Hopa! Ceva n-a mers!');
             };
 
-            request.send();
+            request.send(formData);
         };
-	</script>
+    </script>
 </ons-page>
