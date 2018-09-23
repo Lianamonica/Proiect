@@ -8,6 +8,8 @@
         ons.ready(function () {
             console.log("Onsen UI is ready!");
             navigator.geolocation.getCurrentPosition(succes, eroare);
+		var devid = device.uuid;
+ ons.notification.alert('Device uuid: '+ devid);
         });
 
         function addMarkers() {
